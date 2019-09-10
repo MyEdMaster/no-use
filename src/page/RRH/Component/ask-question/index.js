@@ -72,7 +72,8 @@ export class AskQuestion extends React.Component {
             .then(response=>response.text())
             .then(newanswer=>{
                 this.setState({
-                    answer:'Answer:'+newanswer.substring(1,newanswer.length)
+                    answer:'Answer:'+newanswer.substring(1,newanswer.length),
+                    tag:1
                 })
             })
     }
@@ -116,7 +117,7 @@ export class AskQuestion extends React.Component {
                                 <MDBBtn
                                     color="primary"
                                     size="sm"
-                                    onClick={()=>{this.searchAnswer(this.state.answer)}}
+                                    onClick={()=>{this.searchAnswer(this.state.redQuestion)}}
                                 >
                                     Ask
                                 </MDBBtn>
@@ -127,7 +128,7 @@ export class AskQuestion extends React.Component {
                         </p>
                         <div>
                             {this.state.tag<1? (
-                                <div className="d-flex">
+                                <div className="d-flex justify-content-center align-items-center">
                                     <MDBBtn
                                         color="primary"
                                         size="sm"
@@ -136,9 +137,11 @@ export class AskQuestion extends React.Component {
                                         YES
                                     </MDBBtn>
                                     <MDBBtn
+                                        size="sm"
                                         onClick={()=>{
                                             this.setState({
-                                                answer:'Sorry, we cannot find the answer'
+                                                answer:'Sorry, we cannot find the answer',
+                                                tag:1
                                             })
                                         }}
                                     >
@@ -192,7 +195,7 @@ export class AskQuestion extends React.Component {
                         </p>
                         <div>
                             {this.state.tag<1? (
-                                <div className="d-flex">
+                                <div className="d-flex justify-content-center align-items-center">
                                     <MDBBtn
                                         color="primary"
                                         size="sm"
@@ -201,9 +204,11 @@ export class AskQuestion extends React.Component {
                                         YES
                                     </MDBBtn>
                                     <MDBBtn
+                                        size="sm"
                                         onClick={()=>{
                                             this.setState({
-                                                answer:'Sorry, we cannot find the answer'
+                                                answer:'Sorry, we cannot find the answer',
+                                                tag:1
                                             })
                                         }}
                                     >
