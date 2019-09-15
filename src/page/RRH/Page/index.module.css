@@ -1,7 +1,8 @@
 .body{
-    background: #ffffcc;
+    background: #e8eaf6;
     font-family: "Georgia", serif;
 }
+
 .title{
     font-family: "Georgia", serif;
     color: #E71D36;
@@ -64,4 +65,16 @@
     position: fixed;
     bottom: 40%;
     right: 0;
+}
+
+.next {
+    cursor: pointer;
+    color:blue;
+    margin-top: 30px;
+    font-family: "Great Vibes", cursive;
+    font-size: 20px;
+}
+.next:hover {
+    transition: font-weight 0.5s;
+    font-weight: bold;
 }

@@ -44,7 +44,7 @@ export class Page4 extends React.Component {
                         className={classes.a}>&laquo; Previous
                     </div>
                     <div
-                        onClick={() => {this.props.history.push('/page5');}}
+                        onClick={() => {this.props.history.push('/rrh/page5');}}
                         className={classes.a}>Next &raquo;
                     </div>
 

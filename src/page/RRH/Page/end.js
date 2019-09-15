@@ -33,7 +33,7 @@ export class End extends React.Component {
                         className={classes.a}>&laquo; Previous
                     </div>
                     <div
-                        onClick={() => {this.props.history.push('/rrh');}}
+                        onClick={() => {this.props.history.push('/rrh/cover');}}
                         className={classes.a}>Again &raquo;
                     </div>
 
