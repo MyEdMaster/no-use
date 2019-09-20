@@ -9,7 +9,7 @@ import {
     MDBSideNavItem,
     MDBSideNavCat,
     MDBSideNavNav,
-    MDBSideNav,
+    MDBSideNav, MDBNavbarToggler, MDBCollapse,
 } from "mdbreact";
 import classes from './index.module.css'
 export class Nav extends React.Component {
@@ -29,145 +29,131 @@ export class Nav extends React.Component {
     render() {
         return (
             <div> <div className="deep-purple-skin">
-                <MDBSideNav
-                    triggerOpening={this.state.toggleStateA}
-                    bg="https://mdbootstrap.com/img/Photos/Others/sidenav4.jpg"
-                    mask="strong"
-                    hidden
-                >
-
-                    <div className={`${classes.Papyrus} py-3`}>MyEdMaster</div>
-
-                    {/*<li>*/}
-                    {/*<ul className="social">*/}
-                    {/*<li>*/}
-                    {/*<a href="#!">*/}
-                    {/*<MDBIcon fab icon="facebook-f" />*/}
-                    {/*</a>*/}
-                    {/*</li>*/}
-                    {/*<li>*/}
-                    {/*<a href="#!">*/}
-                    {/*<MDBIcon fab icon="pinterest" />*/}
-                    {/*</a>*/}
-                    {/*</li>*/}
-                    {/*<li>*/}
-                    {/*<a href="#!">*/}
-                    {/*<MDBIcon fab icon="google-plus-g" />*/}
-                    {/*</a>*/}
-                    {/*</li>*/}
-                    {/*<li>*/}
-                    {/*<a href="#!">*/}
-                    {/*<MDBIcon fab icon="twitter" />*/}
-                    {/*</a>*/}
-                    {/*</li>*/}
-                    {/*</ul>*/}
-                    {/*</li>*/}
-                    <MDBInput
-                        type="text"
-                        hint="Search"
-                        style={{
-                            color: "#fffff",
-                            padding: "0 10px 8px 30px",
-                            boxSizing: "border-box"
-                        }}
-                    />
-                    <MDBSideNavNav>
-                        <MDBSideNavCat
-                            name="Little Red Riding Hood"
-                            id="submit-blog-cat"
-                            icon="chevron-right"
-                        >
-                            <MDBSideNavItem>Ask Question</MDBSideNavItem>
-                            {/*<MDBSideNavItem>Registration form</MDBSideNavItem>*/}
-                        </MDBSideNavCat>
-                        <MDBSideNavCat
-                            name="Complex Numbers"
-                            id="submit-blog-cat"
-                            icon="chevron-right"
-                        >
-                            <MDBSideNavItem>Start</MDBSideNavItem>
-                            {/*<MDBSideNavItem>Registration form</MDBSideNavItem>*/}
-                        </MDBSideNavCat>
-
-                        <MDBSideNavCat
-                            name="Contact me"
-                            id="contact-me-cat"
-                            icon="envelope"
-                        >
-                            <MDBSideNavItem>FAQ</MDBSideNavItem>
-                            <MDBSideNavItem>Write a message</MDBSideNavItem>
-                        </MDBSideNavCat>
-                        {/*<MDBSideNavCat*/}
-                        {/*iconRegular*/}
-                        {/*name="Instruction"*/}
-                        {/*id="instruction-cat"*/}
-                        {/*icon="hand-pointer"*/}
-                        {/*>*/}
-                        {/*<MDBSideNavItem>For bloggers</MDBSideNavItem>*/}
-                        {/*<MDBSideNavItem>For authors</MDBSideNavItem>*/}
-                        {/*</MDBSideNavCat>*/}
-                        {/*<MDBSideNavCat name="About" id="about-cat" icon="eye">*/}
-                        {/*<MDBSideNavItem>Instruction</MDBSideNavItem>*/}
-                        {/*<MDBSideNavItem>Monthly meetings</MDBSideNavItem>*/}
-                        {/*</MDBSideNavCat>*/}
-                    </MDBSideNavNav>
-                </MDBSideNav>
-                <MDBNavbar double expand="lg" fixed="top" scrolling className='indigo lighten-4'>
-                    <MDBNavbarNav left>
-                        <MDBNavItem>
-                            <div
-                                onClick={this.handleToggleClickA}
-                                key="sideNavToggleA"
-                                style={{
-                                    lineHeight: "40px",
-                                    marginRight: "1em",
-                                    verticalAlign: "middle"
-                                }}
-                            >
-                                <MDBIcon icon="bars" className="black-text" size="2x" />
-                            </div>
-                        </MDBNavItem>
-                        <MDBNavItem
-                            className="d-none d-md-inline"
-                            >
+                <div className="deep-purple-skin">
+                    <MDBSideNav
+                        triggerOpening={this.state.toggleStateA}
+                        bg="https://mdbootstrap.com/img/Photos/Others/sidenav4.jpg"
+                        mask="strong"
+                        hidden
+                    >
+                        <div>
                             <a
+                                className="py-3"
                                 href="/home"
                                 style={{
                                     cursor:'pointer',
-                                    fontFamily: 'Arial',
-                                    fontSize: '25px',
+                                    fontFamily:'Comic Sans MS',
+                                    fontSize: '22px',
                                     fontStyle: 'normal',
-                                    color:'black',
+                                    color:'white',
                                     fontWeight: '700',
-                                }}>
+                                    textAlign:'center'
+                                }}
+                            >
                                 MyEdMaster
                             </a>
+                        </div>
 
-                        </MDBNavItem>
-                    </MDBNavbarNav>
-                    {/*<MDBNavbarNav right style={specialCaseNavbarStyles}>*/}
-                    {/*<MDBNavItem active>*/}
-                    {/*<div>*/}
-                    {/*<MDBIcon icon="envelope" className="d-inline-inline" />{" "}*/}
-                    {/*<div className="d-none d-md-inline">Contact</div>*/}
-                    {/*</div>*/}
-                    {/*</MDBNavItem>*/}
-                    {/*<MDBNavItem>*/}
-                    {/*<div>*/}
-                    {/*<MDBIcon far icon="comments" className="d-inline-inline" />{" "}*/}
-                    {/*<div className="d-none d-md-inline">Support</div>*/}
-                    {/*</div>*/}
-                    {/*</MDBNavItem>*/}
-                    {/*<MDBNavItem>*/}
-                    {/*<div>*/}
-                    {/*<MDBIcon icon="user" className="d-inline-inline" />{" "}*/}
-                    {/*<div className="d-none d-md-inline">Account</div>*/}
-                    {/*</div>*/}
-                    {/*</MDBNavItem>*/}
-                    {/*</MDBNavbarNav>*/}
+                        <MDBInput
+                            type="text"
+                            hint="Search"
+                            style={{
+                                fontFamily:'Comic Sans MS',
+                                fontSize:'22px',
+                                color: "#ffffff",
+                                padding: "0 10px 8px 30px",
+                                boxSizing: "border-box"
+                            }}
+
+                        />
+                        <MDBSideNavNav>
+                            <MDBSideNavCat
+                                name="Reading"
+                                id="submit-blog-cat"
+                                icon="chevron-right"
+                                style={{
+                                    fontFamily:'Comic Sans MS',
+                                    fontSize:'16px',
+                                    color: "#ffffff",
+                                }}
+                            >
+                                <MDBSideNavItem className={classes.subMenu} onClick={() => {this.props.history.push('/rrh/cover');}}>Little Red Riding Hood</MDBSideNavItem>
+                                {/*<MDBSideNavItem>Registration form</MDBSideNavItem>*/}
+                            </MDBSideNavCat>
+                            <MDBSideNavCat
+                                name="Math"
+                                id="submit-blog-cat"
+                                icon="chevron-right"
+                                style={{
+                                    fontFamily:'Comic Sans MS',
+                                    fontSize:'16px',
+                                    color: "#ffffff",
+                                }}
+                            >
+                                <MDBSideNavItem className={classes.subMenu} onClick={() => {this.props.history.push('/complex-home');}}>Complex Numbers</MDBSideNavItem>
+
+                            </MDBSideNavCat>
+
+                            <MDBSideNavCat
+                                name="Science"
+                                id="contact-me-cat"
+                                icon="chevron-right"
+                                style={{
+                                    fontFamily:'Comic Sans MS',
+                                    fontSize:'16px',
+                                    color: "#ffffff",
+                                }}
+                            >
+                                <MDBSideNavItem onClick={() => {this.props.history.push('/home');}}className={classes.subMenu}>Play basketball</MDBSideNavItem>
+
+                            </MDBSideNavCat>
+                        </MDBSideNavNav>
+                    </MDBSideNav>
+                </div>
+                <MDBNavbar className="deep-purple lighten-1" expand="md" fixed="top" style={{color:'#32313B'}}>
+
+                    <MDBNavbarToggler onClick={this.handleTogglerClick} />
+                    <MDBCollapse isOpen={this.state.collapsed} navbar>
+                        <MDBNavbarNav left>
+                            <MDBNavItem>
+                                <div
+                                    onClick={this.handleToggleClickA}
+                                    key="sideNavToggleA"
+                                    style={{
+                                        lineHeight: "40px",
+                                        marginRight: "1em",
+                                        verticalAlign: "middle"
+                                    }}
+                                >
+                                    <MDBIcon icon="bars" size="2x" className="mt-1" style={{color:'white'}}/>
+                                </div>
+                            </MDBNavItem>
+
+                        </MDBNavbarNav>
+                        <MDBNavbarNav center>
+                            <MDBNavItem
+                                className="d-none d-md-inline"
+                            >
+                                <a
+                                    href="/home"
+
+                                    style={{
+                                        cursor:'pointer',
+                                        fontFamily:'Comic Sans MS',
+                                        fontSize: '25px',
+                                        fontStyle: 'normal',
+                                        color:'white',
+                                        fontWeight: '700',
+                                    }}>
+                                    MyEdMaster
+                                </a>
+
+                            </MDBNavItem>
+                        </MDBNavbarNav>
+                    </MDBCollapse>
                 </MDBNavbar>
             </div>
-                <div style={{height:'65.6px'}}>
+                <div style={{height:'60.6px'}}>
 
                 </div>
                 </div>

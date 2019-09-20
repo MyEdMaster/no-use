@@ -6,7 +6,7 @@ import 'react-animated-router/animate.css';
 
 import {RRH} from "./page/RRH";
 import {HomePage} from "./page/HomePage";
-import {ComplexHome} from "./page/ComplexNumber";
+import {ComplexNumber} from "./page/ComplexNumber";
 
 export class App extends Component {
     render() {
@@ -22,8 +22,8 @@ export class App extends Component {
                         component={routeProps => <RRH {...routeProps} />}
                     />
                     <Route
-                        path="/complex-home"
-                        component={routeProps => <ComplexHome {...routeProps} />}
+                        path="/complex"
+                        component={routeProps => <ComplexNumber {...routeProps} />}
                     />
                     <Redirect to="/home"/>
                 </Switch>

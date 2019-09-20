@@ -34,3 +34,14 @@
     transition: font-weight 0.5s;
     font-weight: bold;
 }
+.menuTitle{
+    font-family:Comic Sans MS;
+    font-size:30px;
+    color: #ffffff;
+    text-align: center;
+}
+.subMenu{
+    font-family:Comic Sans MS;
+    font-size:18px;
+    color: #ffffff;
+}

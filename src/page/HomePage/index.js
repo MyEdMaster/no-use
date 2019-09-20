@@ -17,9 +17,10 @@ import {
     MDBRow,
     MDBCol,
     MDBMask,
-    MDBBtn
+    MDBBtn, MDBNavbarBrand, MDBNavLink
 } from "mdbreact";
 import classes from './index.module.css'
+import bg from './Lib/homepage.jpg'
 export class HomePage extends React.Component {
     constructor(props) {
         super(props);
@@ -42,14 +43,7 @@ export class HomePage extends React.Component {
 
 
     render() {
-        const navStyle = { marginTop: "0rem" };
-        const overlay = (
-            <div
-                id="sidenav-overlay"
-                style={{ backgroundColor: "transparent" }}
-                onClick={this.handleTogglerClick}
-            />
-        );
+
 
         return (
             <div>
@@ -61,140 +55,191 @@ export class HomePage extends React.Component {
                         hidden
                     >
 
-                        <div className={`${classes.Papyrus} py-3`}>MyEdMaster</div>
+                        <div>
+                            <a
+                                className="py-3"
+                                href="/home"
+                                style={{
+                                    cursor:'pointer',
+                                    fontFamily:'Comic Sans MS',
+                                    fontSize: '22px',
+                                    fontStyle: 'normal',
+                                    color:'white',
+                                    fontWeight: '700',
+                                    textAlign:'center'
+                                }}
+                            >
+                                MyEdMaster
+                            </a>
+                        </div>
                         <MDBInput
                             type="text"
                             hint="Search"
                             style={{
-                                color: "#fffff",
+                                fontFamily:'Comic Sans MS',
+                                fontSize:'22px',
+                                color: "#ffffff",
                                 padding: "0 10px 8px 30px",
                                 boxSizing: "border-box"
                             }}
+
                         />
                         <MDBSideNavNav>
                             <MDBSideNavCat
-                                name="Little Red Riding Hood"
+                                name="Reading"
                                 id="submit-blog-cat"
                                 icon="chevron-right"
+                                style={{
+                                    fontFamily:'Comic Sans MS',
+                                    fontSize:'16px',
+                                    color: "#ffffff",
+                                }}
                             >
-                                <MDBSideNavItem onClick={() => {this.props.history.push('/rrh/cover');}}>Ask Question</MDBSideNavItem>
+                                <MDBSideNavItem className={classes.subMenu} onClick={() => {this.props.history.push('/rrh/cover');}}>Little Red Riding Hood</MDBSideNavItem>
                                 {/*<MDBSideNavItem>Registration form</MDBSideNavItem>*/}
                             </MDBSideNavCat>
                             <MDBSideNavCat
-                                name="Complex Numbers"
+                                name="Math"
                                 id="submit-blog-cat"
                                 icon="chevron-right"
+                                style={{
+                                    fontFamily:'Comic Sans MS',
+                                    fontSize:'16px',
+                                    color: "#ffffff",
+                                }}
                             >
-                                <MDBSideNavItem onClick={() => {this.props.history.push('/complex-home');}}>Start</MDBSideNavItem>
+                                <MDBSideNavItem className={classes.subMenu} onClick={() => {this.props.history.push('/complex-home');}}>Complex Numbers</MDBSideNavItem>
 
                             </MDBSideNavCat>
 
                             <MDBSideNavCat
-                                name="Contact me"
+                                name="Science"
                                 id="contact-me-cat"
-                                icon="envelope"
+                                icon="chevron-right"
+                                style={{
+                                    fontFamily:'Comic Sans MS',
+                                    fontSize:'16px',
+                                    color: "#ffffff",
+                                }}
                             >
-                                <MDBSideNavItem>FAQ</MDBSideNavItem>
-                                <MDBSideNavItem>Write a message</MDBSideNavItem>
+                                <MDBSideNavItem onClick={() => {this.props.history.push('/home');}}className={classes.subMenu}>Play basketball</MDBSideNavItem>
+
                             </MDBSideNavCat>
                         </MDBSideNavNav>
                     </MDBSideNav>
                 </div>
                 <Router>
-                    <div>
-                        <MDBNavbar
-                            double
-                            style={navStyle}
-                            dark
-                            expand="md"
-                            fixed="top"
-                            scrolling
-                            transparent
-                        >
-                            <MDBNavbarToggler onClick={this.handleTogglerClick} />
-                            <MDBCollapse isOpen={this.state.collapsed} navbar>
-                                <MDBNavbarNav left>
-                                    <MDBNavItem>
-                                        <div
-                                            onClick={this.handleToggleClickA}
-                                            key="sideNavToggleA"
-                                            style={{
-                                                lineHeight: "40px",
-                                                marginRight: "1em",
-                                                verticalAlign: "middle"
-                                            }}
-                                        >
-                                            <MDBIcon icon="bars" color="white" size="2x" />
-                                        </div>
-                                    </MDBNavItem>
-                                    <MDBNavItem
-                                        className="d-none d-md-inline"
+
+
+                    <MDBNavbar className="deep-purple lighten-1" expand="md" fixed="top" >
+
+                        <MDBNavbarToggler onClick={this.handleTogglerClick} />
+                        <MDBCollapse isOpen={this.state.collapsed} navbar>
+                            <MDBNavbarNav left>
+                                <MDBNavItem>
+                                    <div
+                                        onClick={this.handleToggleClickA}
+                                        key="sideNavToggleA"
+                                        style={{
+                                            lineHeight: "40px",
+                                            marginRight: "1em",
+                                            verticalAlign: "middle"
+                                        }}
                                     >
-                                        <a
-                                            href="/home"
-                                            style={{
-                                                cursor:'pointer',
-                                                fontFamily: 'Arial',
-                                                fontSize: '25px',
-                                                fontStyle: 'normal',
-                                                color:'black',
-                                                fontWeight: '700',
-                                            }}>
-                                            MyEdMaster
-                                        </a>
+                                        <MDBIcon icon="bars" size="2x" className="mt-1" style={{color:'white'}}/>
+                                    </div>
+                                </MDBNavItem>
 
-                                    </MDBNavItem>
-                                </MDBNavbarNav>
-                            </MDBCollapse>
+                            </MDBNavbarNav>
+                            <MDBNavbarNav center>
+                                <MDBNavItem
+                                    className="d-none d-md-inline"
+                                >
+                                    <a
+                                        href="/home"
 
-                        </MDBNavbar>
-                        {this.state.collapsed && overlay}
-                    </div>
+                                        style={{
+                                            cursor:'pointer',
+                                            fontFamily:'Comic Sans MS',
+                                            fontSize: '25px',
+                                            fontStyle: 'normal',
+                                            color:'white',
+                                            fontWeight: '700',
+                                        }}>
+                                        MyEdMaster
+                                    </a>
 
+                                </MDBNavItem>
+                            </MDBNavbarNav>
+                        </MDBCollapse>
+                    </MDBNavbar>
                 </Router>
 
-                <MDBView src={`https://mdbootstrap.com/img/Photos/Others/gradient2.png`} >
+                <MDBView src={bg} >
                     <MDBMask
-                        className="rgba-purple-slight d-flex justify-content-center align-items-center"
-                        overlay="indigo-light"
+                        className="justify-content-center align-items-center"
+                        overlay="white-light"
+
                     >
+                        <div style={{height:'62.5px'}}>
+
+                        </div>
+
                         <MDBContainer>
                             <section className="text-center my-5">
-                                <h2 className="h1-responsive font-weight-bold my-5">
+                                <h2 className={`${classes.orange} h1-responsive font-weight-bold my-5`}>
                                     What MyEdMaster Can Do?
                                 </h2>
-                                <p className="lead w-responsive mx-auto mb-5">
-                                   MyEdMaster..
+                                <p
+                                    className="lead w-responsive mx-auto mb-5"
+                                    style={{
+                                        fontFamily:'Comic Sans MS',
+                                        color:'#7F2B82'
+                                    }}
+                                >
+                                    MyEdMaster was amazing. There was so much personal attention for each student even when in a group class. The instructors were very personable and helpful!... - Akila P.,
                                 </p>
                                 <MDBRow>
                                     <MDBCol
                                         md="4"
                                         className={classes.content}
-                                        onClick={() => {this.props.history.push('/rrh/cover');}}
+
                                     >
-                                        <MDBIcon icon="book" size="3x" className="pink-text mt-2" />
-                                        <h4 className="font-weight-bold my-4">Story</h4>
-                                        <h5 className="mb-md-0 mb-5 ">
-                                            Story: Little Red Riding Hood. Try to ask questions!
-                                        </h5>
+                                        <MDBIcon icon="book-open" size="3x" className="mt-2" style={{color:'#E41A6A'}}/>
+                                        <h4 className="font-weight-bold my-4" style={{fontFamily:'Comic Sans MS',color:'#E41A6A'}}>Reading</h4>
+                                        <p
+                                            className={classes.reading}
+
+                                            onClick={() => {this.props.history.push('/rrh/cover');}}
+                                        >
+                                            Story 1: Little Red Riding Hood.
+                                        </p>
                                     </MDBCol>
                                     <MDBCol
                                         md="4"
                                         className={classes.content}
                                         onClick={() => {this.props.history.push('/complex-home');}}
                                     >
-                                        <MDBIcon icon="chart-area" size="3x" className="cyan-text mt-2" />
-                                        <h4 className="font-weight-bold my-4">Complex Numbers</h4>
-                                        <h5 className="mb-md-0 mb-5 ">
-                                            say something
-                                        </h5>
+                                        <MDBIcon icon="square-root-alt" size="3x" className="mt-2" style={{color:'#F1831D'}}/>
+                                        <h4 className="font-weight-bold my-4" style={{fontFamily:'Comic Sans MS',color:'#F1831D'}}>Math</h4>
+                                        <p
+                                            className={classes.math}
+
+                                            onClick={() => {this.props.history.push('/rrh/cover');}}
+                                        >
+                                            Learn the complex numbers
+                                        </p>
                                     </MDBCol>
                                     <MDBCol md="4" className={classes.content}>
-                                        <MDBIcon far icon="comments" size="3x" className="orange-text mt-2" />
-                                        <h4 className="font-weight-bold my-4">Support</h4>
-                                        <h5 className="mb-md-0 mb-5 ">
-                                            say something
-                                        </h5>
+                                        <MDBIcon icon="basketball-ball" size="3x" className="mt-2" style={{color:'#2EAFB0'}} />
+                                        <h4 className="font-weight-bold my-4" style={{fontFamily:'Comic Sans MS',color:'#2EAFB0'}}>Science</h4>
+                                        <p
+                                            className={classes.science}
+
+                                            onClick={() => {this.props.history.push('/rrh/cover');}}
+                                        >
+                                            Play Basketball
+                                        </p>
                                     </MDBCol>
                                 </MDBRow>
                             </section>
