@@ -90,7 +90,7 @@ export class Nav extends React.Component {
                                     color: "#ffffff",
                                 }}
                             >
-                                <MDBSideNavItem className={classes.subMenu} onClick={() => {this.props.history.push('/complex-home');}}>Complex Numbers</MDBSideNavItem>
+                                <MDBSideNavItem className={classes.subMenu} onClick={() => {this.props.history.push('/complex');}}>Complex Numbers</MDBSideNavItem>
 
                             </MDBSideNavCat>
 

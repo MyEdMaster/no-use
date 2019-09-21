@@ -108,7 +108,7 @@ export class HomePage extends React.Component {
                                     color: "#ffffff",
                                 }}
                             >
-                                <MDBSideNavItem className={classes.subMenu} onClick={() => {this.props.history.push('/complex-home');}}>Complex Numbers</MDBSideNavItem>
+                                <MDBSideNavItem className={classes.subMenu} onClick={() => {this.props.history.push('/complex');}}>Complex Numbers</MDBSideNavItem>
 
                             </MDBSideNavCat>
 
@@ -218,7 +218,7 @@ export class HomePage extends React.Component {
                                     <MDBCol
                                         md="4"
                                         className={classes.content}
-                                        onClick={() => {this.props.history.push('/complex-home');}}
+                                        onClick={() => {this.props.history.push('/complex');}}
                                     >
                                         <MDBIcon icon="square-root-alt" size="3x" className="mt-2" style={{color:'#F1831D'}}/>
                                         <h4 className="font-weight-bold my-4" style={{fontFamily:'Comic Sans MS',color:'#F1831D'}}>Math</h4>
@@ -231,7 +231,7 @@ export class HomePage extends React.Component {
                                         </p>
                                     </MDBCol>
                                     <MDBCol md="4" className={classes.content}>
-                                        <MDBIcon icon="basketball-ball" size="3x" className="mt-2" style={{color:'#2EAFB0'}} />
+                                        <MDBIcon icon="atom" size="3x" className="mt-2" style={{color:'#2EAFB0'}} />
                                         <h4 className="font-weight-bold my-4" style={{fontFamily:'Comic Sans MS',color:'#2EAFB0'}}>Science</h4>
                                         <p
                                             className={classes.science}

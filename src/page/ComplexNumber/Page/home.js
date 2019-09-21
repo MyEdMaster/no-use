@@ -2,6 +2,7 @@ import React from 'react';
 import {Redirect, Route, Switch} from 'react-router-dom';
 import {MDBRow, MDBCol,MDBBtn, MDBContainer} from 'mdbreact'
 import classes from './index.module.css'
+import {InlineMath} from "react-katex";
 
 
 export class ComplexHome extends React.Component {
@@ -36,7 +37,7 @@ export class ComplexHome extends React.Component {
                   </MDBCol>
                   <MDBCol size="6" className={classes.border}>
                       <div className={classes.euq}>
-                          a + bi
+                          <InlineMath>a + bi</InlineMath>
                       </div>
                   </MDBCol>
               </MDBRow>
@@ -50,7 +51,11 @@ export class ComplexHome extends React.Component {
               </MDBRow>
               <MDBRow center>
                   <MDBCol size="2">
-                      <MDBBtn color="deep-purple lighten-1" className={`${classes.btn} w-100 mt-3`}>Start Learning</MDBBtn>
+                      <MDBBtn
+                          color="deep-purple lighten-1"
+                          className={`${classes.btn} w-100 mt-3`}
+                          onClick={() => {this.props.history.push('/complex/page1');}}
+                      >Start Learning</MDBBtn>
                   </MDBCol>
               </MDBRow>
           </div>
