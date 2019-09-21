@@ -44,7 +44,7 @@ export class ComplexNumber extends React.Component {
                   </div>
                   <div
                       className={this.props.location.pathname.indexOf('/complex/page3') > -1? classes.selectmenubar: classes.menubar}
-                      onClick={() => {this.props.history.push('/complex/page2');}}
+                      onClick={() => {this.props.history.push('/complex/page3');}}
                   >
                       Lesson 3: Division
                   </div>
