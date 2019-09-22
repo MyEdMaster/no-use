@@ -69,7 +69,8 @@ export class ComplexPage3 extends React.Component {
                     this.setState({
                         answers:arr,
                         step:step,
-                        isRight:true
+                        isRight:true,
+                        value:''
                     })
                 }
             })
@@ -409,6 +410,7 @@ export class ComplexPage3 extends React.Component {
                                         label={`Step ${this.state.step.toString()}`}
                                         className="mr-3"
                                         size="sm"
+                                        value={this.state.value}
                                         style={this.state.isRight?{
                                             border:'solid',
                                             borderColor:'#81c784',
