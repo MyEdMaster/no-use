@@ -27,36 +27,39 @@ export class ComplexPage4 extends React.Component {
 
                     </MDBCol>
                     <MDBCol size="6">
-                        <p className={classes.ph}>
+                        <div className={classes.ph}>
                             This page will assess the student to determine their proficiency at various topics of knowledge in this module, and adjust its knowledge model based on it.
-                        </p>
+                        </div>
                         <br/>
 
-                        <MDBRow className={classes.border} style={{borderWidth:'1px'}}>
-                            <div>
+                        <div className={classes.border} style={{borderWidth:'1px'}}>
+
                             <p className={classes.ph2} style={{fontSize:'40px'}}>
                                 What is the format of a dividing complex numbers problem?
                             </p>
 
-                            <input
-
-                                placeholder="Enter your response here"
-                                className="form-control"
-                                style={{
-                                    borderStyle:'solid',
-                                    borderWidth:'1px',
-                                    borderColor:'#33b5e5',
-                                    borderRadius:'15px',
-                                    fontFamily:'\'Rajdhani\', sans-serif',
-                                    fontSize:'30px'
-                                }}
-                            />
+                            <div className="flex-grow-1 px-3">
+                                <input
+                                    placeholder="Enter your response here"
+                                    style={{
+                                        borderStyle:'solid',
+                                        borderWidth:'1px',
+                                        borderColor:'#33b5e5',
+                                        borderRadius:'15px',
+                                        fontFamily:'\'Rajdhani\', sans-serif',
+                                        fontSize:'30px',
+                                        width:'100%'
+                                    }}
+                                />
                             </div>
-                            <div>
+                            <br/>
+                            <div className="d-flex justify-content-center">
+                                <div>
                                     <MDBBtn color=" orange lighten-2" className={`${classes.btn} mt-3 white-text`}>Submit</MDBBtn>
-                            </div>
-                            <div>
+                                </div>
+                                <div>
                                     <MDBBtn color=" brown lighten-1" className={`${classes.btn} mt-3 white-text`}>Next Question</MDBBtn>
+                                </div>
                             </div>
 
 
@@ -65,7 +68,8 @@ export class ComplexPage4 extends React.Component {
 
 
 
-                        </MDBRow>
+
+                        </div>
 
                         <br/>
                     </MDBCol>

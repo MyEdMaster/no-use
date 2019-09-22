@@ -1,20 +1,83 @@
 import React from 'react';
 import {Video} from "../video-component/video";
-import {MDBRow, MDBCol, MDBBtn, MDBCard, MDBIcon} from 'mdbreact'
+import {MDBRow, MDBCol, MDBBtn, MDBCard, MDBIcon,MDBModal,MDBInput, MDBModalFooter} from 'mdbreact'
 import { InlineMath, BlockMath } from 'react-katex';
 import classes from './index.module.css'
+import {Input} from "./Input";
 
 
 export class ComplexPage3 extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-
+            modal14: false,
+            answers:[],
+            a:'-6',
+            b:'-4',
+            c:'2',
+            d:'5',
+            value:'',
+            step:1,
+            hint:'',
+            isRight:true
         };
 
     }
+    toggle = nr => () => {
+        let modalNumber = 'modal' + nr
+        this.setState({
+            [modalNumber]: !this.state[modalNumber]
+        });
+    }
+    handleChange(event) {
+
+        this.setState({
+                value: event.target.value,
+            });
+    }
+    post = ()=>{
+        const option={
+            method:'POST',
+            headers: {
+                'content-type': 'application/json',
+            },
+            body:JSON.stringify({
+                "A":this.state.a,
+                "B":this.state.b,
+                "C":this.state.c,
+                "D":this.state.d,
+                "step":this.state.step.toString(),
+                "answer":this.state.value,
+            })
+        };
+        fetch('http://127.0.0.1:5000/complexnumber',option)
+            .then(response=>response.text())
+            .then(answer=>{
+                this.setState({
+                    hint:answer.substring(1,answer.length)
+                })
+                if (answer.substr(0, 1) === '0'){
+                    this.setState({
+                        isRight:false
+                    })
+                }
+                if (answer.substr(0, 1) === '1'){
+                    let arr = this.state.answers;
+                    let step= this.state.step;
+                    arr.push(this.state.value)
+                    step = step + 1
+                    this.setState({
+                        answers:arr,
+                        step:step,
+                        isRight:true
+                    })
+                }
+            })
+    }
 
     render() {
+
+        console.log(this.state.answers)
         return (
             <div>
                 <div className="d-flex align-items-baseline justify-content-center">
@@ -207,36 +270,186 @@ export class ComplexPage3 extends React.Component {
                                 className={classes.pb2}
                                 style={{borderStyle:'solid',borderBottomColor:'#9e9e9e', borderWidth:'0 0 1px 0'}}
                             >
-                                Solve the following: (2 + 3i) / (-4 + 7i). Begin your work by first rewriting the problem in 'Step 1' in the worksheet.
+                                Solve the following:
+                                ({this.state.a} + {this.state.b}i) / ({this.state.c} + {this.state.d}i).
+                                Begin your work by first rewriting the problem in 'Step 1' in the worksheet.
                                 <tr/><br/>
                             </p>
-                            <p className={classes.pb3}>
+                            <p
+                                className={classes.pb3}
+
+                                onClick={this.toggle(14)}
+                            >
                                 ADD YOUR OWN PROBLEM
                             </p>
                         </MDBCard>
+
+                        <MDBModal isOpen={this.state.modal14} toggle={this.toggle(14)} size="lg" centered>
+                            <div className="p-3">
+                                <div
+                                    toggle={this.toggle(14)}
+
+                                    style={{
+                                        fontFamily:'\'Roboto\',sans-serif',
+                                        fontSize:'28px',
+                                        fontWeight:'bolder'
+                                    }}
+                                >
+                                    Add Your Own Problem
+                                </div>
+                                <br/>
+                                <div
+                                    style={{
+                                        fontFamily:'\'Roboto\',sans-serif',
+                                        fontSize:'16px',
+                                        fontWeight:'bolder'
+                                    }}
+                                >
+                                    Add your own problem in the form (a + bi) / (c + di). You can set the values of a, b, c, and d below.
+                                </div>
+                                <div className="d-flex justify-content-between">
+                                    <MDBInput
+                                        onChange={(e) => {
+                                            this.setState({
+                                                a: e.target.value
+                                            });
+                                        }}
+
+                                        label="a" className="mr-3"  size="sm" style={{border:'solid',borderColor:'#7e57c2', borderWidth:'0 0 2px 0',fontFamily:'\'Roboto\',sans-serif',}}
+                                    />
+                                    <MDBInput
+                                        onChange={(e) => {
+                                            this.setState({
+                                                b: e.target.value
+                                            });
+                                        }}
+                                        label="b" className="mr-3" size="sm" style={{border:'solid',borderColor:'#7e57c2', borderWidth:'0 0 2px 0',fontFamily:'\'Roboto\',sans-serif',}}
+                                    />
+                                    <MDBInput
+                                        onChange={(e) => {
+                                            this.setState({
+                                                c: e.target.value
+                                            });
+                                        }}
+                                        label="c" className="mr-3 " size="sm" style={{border:'solid',borderColor:'#7e57c2', borderWidth:'0 0 2px 0',fontFamily:'\'Roboto\',sans-serif',}}
+                                    />
+                                    <MDBInput
+                                        onChange={(e) => {
+                                            this.setState({
+                                                d: e.target.value
+                                            });
+                                        }}
+                                        label="d" size="sm" style={{border:'solid',borderColor:'#7e57c2', borderWidth:'0 0 2px 0',fontFamily:'\'Roboto\',sans-serif',}}
+                                    />
+                                </div>
+                            </div>
+
+                            <MDBModalFooter>
+                                <MDBBtn
+                                    color="deep-purple"
+                                    size="md"
+                                    onClick={this.toggle(14)}
+                                    style={{
+                                        fontFamily:'\'Roboto\',sans-serif',
+                                        fontSize:'12px',
+                                        fontWeight:'bolder'
+                                    }}
+                                >Cancel
+                                </MDBBtn>
+                                <MDBBtn
+                                    className="orange accent-2"
+                                    size="md"
+                                    onClick={this.toggle(14)}
+                                    style={{
+                                        fontFamily:'\'Roboto\',sans-serif',
+                                        fontSize:'12px',
+                                        fontWeight:'bolder'
+                                    }}
+                                >Set</MDBBtn>
+                            </MDBModalFooter>
+                        </MDBModal>
                         <br/>
                         <div className={`${classes.worksheet} px-3 py-3`}>
                             <label className={classes.ws}>
                                 Worksheet
                             </label>
-                            <div className="p-1">
-                                 <textarea
-                                     className="form-control"
-                                     id="exampleFormControlTextarea1"
-                                     rows="10"
-                                     style={{border:'solid',borderColor:'#7e57c2', borderWidth:'1px'}}
-                                 />
+                            <div
+                                className="px-3 pt-3"
+                            >
+                                {this.state.answers.map((item, index)=>{
+                                    return<div
+                                        key={index}
+                                        className="py-2 d-flex align-items-baseline"
+                                        style={{
+                                            border:'solid',
+                                            borderColor:'#388e3c',
+                                            borderWidth:'0 0 2px 0',
+                                            fontFamily:'\'Roboto\',sans-serif',
+                                            fontSize:'18px',
+                                            fontWeight:'bolder'
+                                        }}
+                                    >
+
+
+                                            <span style={{fontWeight:'bold',color:'#388e3c'}}>Step{index+1}</span> &nbsp;{item}
+
+                                    </div>
+                                })}
                             </div>
+                            <div className="px-3 d-flex align-items-baseline">
+                                {/*<div>*/}
+                                    {/*<MDBBtn*/}
+                                        {/*tag="a" floating className=" green lighten-2" size="sm"*/}
+                                    {/*>*/}
+                                        {/*<MDBIcon icon="clipboard-check" />*/}
+                                    {/*</MDBBtn>*/}
+                                {/*</div>*/}
+                                <div className="flex-grow-1">
+                                    <MDBInput
+                                        label={`Step ${this.state.step.toString()}`}
+                                        className="mr-3"
+                                        size="sm"
+                                        style={this.state.isRight?{
+                                            border:'solid',
+                                            borderColor:'#81c784',
+                                            borderWidth:'0 0 2px 0',
+                                            fontFamily:'\'Roboto\',sans-serif',
+                                            fontSize:'18px'
+                                        }:{
+                                            border:'solid',
+                                            borderColor:'#d32f2f',
+                                            borderWidth:'0 0 2px 0',
+                                            fontFamily:'\'Roboto\',sans-serif',
+                                            fontSize:'18px'
+                                        }}
+                                        onChange={(e) => {
+                                            this.setState({
+                                                value: e.target.value
+                                            });
+                                        }}
+                                    />
+                                </div>
+
+
+
+
+
+                            </div>
+
                             <MDBRow center>
-                                <MDBBtn tag="a" floating gradient="peach">
-                                    <MDBIcon icon="thumbs-up" />
-                                </MDBBtn>
-                                <MDBBtn tag="a" floating gradient="blue">
-                                    <MDBIcon icon="check" />
-                                </MDBBtn>
-                                <MDBBtn tag="a" floating disabled className="grey lighten-1">
+                                <MDBBtn
+                                    tag="a" floating className=" green lighten-2"
+                                    onClick={()=>{this.post()}}
+                                >
                                     <MDBIcon icon="clipboard-check" />
                                 </MDBBtn>
+                                {/*<MDBBtn tag="a" floating gradient="peach">*/}
+                                    {/*<MDBIcon icon="thumbs-up" />*/}
+                                {/*</MDBBtn>*/}
+
+                                {/*<MDBBtn tag="a" floating disabled className="grey lighten-1">*/}
+                                    {/*<MDBIcon icon="check" />*/}
+                                {/*</MDBBtn>*/}
                             </MDBRow>
 
                         </div>
@@ -248,8 +461,7 @@ export class ComplexPage3 extends React.Component {
                             style={{boxShadow:'none', borderRadius:'0'}}
                         >
                             <p className={classes.pb}>Hints/Feedback</p>
-                            <p className={classes.pb2}>Hints and feedback will appear here. You will be given feedback when you click the yellow button above. Once you have received
-                                some basic feedback, the arrow buttons below will become purple (enabled) and you will be able to gain additional hints.</p>
+                            <p className={classes.pb2}>{this.state.hint}</p>
                             <MDBRow center>
                                 <MDBBtn tag="a" floating disabled className="grey lighten-1">
                                     <MDBIcon icon="angle-left" />
