@@ -3,6 +3,7 @@ import classes from './index.module.css';
 import llrh from '../../Lib/llrh.jpg';
 import bbw from '../../Lib/bbw.jpg';
 import { MDBBtn, MDBModal, MDBModalBody } from 'mdbreact';
+import {SpeakRecog} from "../SpeakRRH";
 
 export class AskQuestion extends React.Component {
     constructor(props) {
@@ -30,7 +31,6 @@ export class AskQuestion extends React.Component {
             [modalNumber]: !this.state[modalNumber]
         });
     }
-
     searchAnswer=(value)=>{
         const option={
             method:'POST',
@@ -76,7 +76,13 @@ export class AskQuestion extends React.Component {
                     tag:1
                 })
             })
+    };
+    onRecog=(value)=>{
+        this.setState({
+            redQuestion: value
+        });
     }
+
     render() {
         return (
             <div>
@@ -90,6 +96,13 @@ export class AskQuestion extends React.Component {
                 </div>
                 <MDBModal isOpen={this.state.modal1} toggle={this.toggle(1)} frame position="top">
                     <MDBModalBody className="text-center">
+                        <SpeakRecog
+                            recog={(value)=>{
+                                this.setState({
+                                    redQuestion: value
+                                });
+                            }}
+                        />
                         <div className="d-flex justify-content-center align-items-center">
                             <div className="px-3">
                                 <img src={llrh} alt="Little Red Riding Hood" height="71" width="50"/>

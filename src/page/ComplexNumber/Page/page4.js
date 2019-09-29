@@ -3,6 +3,7 @@ import {Video} from "../video-component/video";
 import {MDBRow, MDBCol,MDBBtn} from 'mdbreact'
 import { InlineMath, BlockMath } from 'react-katex';
 import classes from './index.module.css'
+import {SpeakRecogAnylysis} from "../SpeakModuleAnalysis";
 
 
 export class ComplexPage4 extends React.Component {
@@ -39,18 +40,19 @@ export class ComplexPage4 extends React.Component {
                             </p>
 
                             <div className="flex-grow-1 px-3">
-                                <input
-                                    placeholder="Enter your response here"
-                                    style={{
-                                        borderStyle:'solid',
-                                        borderWidth:'1px',
-                                        borderColor:'#33b5e5',
-                                        borderRadius:'15px',
-                                        fontFamily:'\'Rajdhani\', sans-serif',
-                                        fontSize:'30px',
-                                        width:'100%'
-                                    }}
-                                />
+                                {/*<input*/}
+                                    {/*placeholder="Enter your response here"*/}
+                                    {/*style={{*/}
+                                        {/*borderStyle:'solid',*/}
+                                        {/*borderWidth:'1px',*/}
+                                        {/*borderColor:'#33b5e5',*/}
+                                        {/*borderRadius:'15px',*/}
+                                        {/*fontFamily:'\'Rajdhani\', sans-serif',*/}
+                                        {/*fontSize:'30px',*/}
+                                        {/*width:'100%'*/}
+                                    {/*}}*/}
+                                {/*/>*/}
+                                <SpeakRecogAnylysis/>
                             </div>
                             <br/>
                             <div className="d-flex justify-content-center">

@@ -3,7 +3,8 @@ import {Video} from "../video-component/video";
 import {MDBRow, MDBCol, MDBBtn, MDBCard, MDBIcon,MDBModal,MDBInput, MDBModalFooter} from 'mdbreact'
 import { InlineMath, BlockMath } from 'react-katex';
 import classes from './index.module.css'
-import {Input} from "./Input";
+import { useSpeechRecognition } from "react-speech-kit";
+import {SpeakRecogWorksheet} from "./SpeakModuleWorksheet";
 
 
 export class ComplexPage3 extends React.Component {
@@ -75,6 +76,7 @@ export class ComplexPage3 extends React.Component {
                 }
             })
     }
+
 
     render() {
 
@@ -390,21 +392,14 @@ export class ComplexPage3 extends React.Component {
                                             fontWeight:'bolder'
                                         }}
                                     >
-
-
                                             <span style={{fontWeight:'bold',color:'#388e3c'}}>Step{index+1}</span> &nbsp;{item}
 
                                     </div>
                                 })}
                             </div>
+
                             <div className="px-3 d-flex align-items-baseline">
-                                {/*<div>*/}
-                                    {/*<MDBBtn*/}
-                                        {/*tag="a" floating className=" green lighten-2" size="sm"*/}
-                                    {/*>*/}
-                                        {/*<MDBIcon icon="clipboard-check" />*/}
-                                    {/*</MDBBtn>*/}
-                                {/*</div>*/}
+
                                 <div className="flex-grow-1">
                                     <MDBInput
                                         label={`Step ${this.state.step.toString()}`}
@@ -431,11 +426,6 @@ export class ComplexPage3 extends React.Component {
                                         }}
                                     />
                                 </div>
-
-
-
-
-
                             </div>
 
                             <MDBRow center>
@@ -445,15 +435,12 @@ export class ComplexPage3 extends React.Component {
                                 >
                                     <MDBIcon icon="clipboard-check" />
                                 </MDBBtn>
-                                {/*<MDBBtn tag="a" floating gradient="peach">*/}
-                                    {/*<MDBIcon icon="thumbs-up" />*/}
-                                {/*</MDBBtn>*/}
-
-                                {/*<MDBBtn tag="a" floating disabled className="grey lighten-1">*/}
-                                    {/*<MDBIcon icon="check" />*/}
-                                {/*</MDBBtn>*/}
+                                <MDBBtn
+                                    tag="a" floating className=" orange lighten-2"
+                                >
+                                    <MDBIcon icon="microphone" />
+                                </MDBBtn>
                             </MDBRow>
-
                         </div>
                         <br/>
                         <MDBCard
