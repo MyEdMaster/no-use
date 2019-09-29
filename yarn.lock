@@ -8618,6 +8618,11 @@ react-speech-kit@^2.0.2:
   resolved "https://registry.yarnpkg.com/react-speech-kit/-/react-speech-kit-2.0.2.tgz#7039384ac8ec8cb4ff9103b96422d36f0b39caf3"
   integrity sha512-4TuKTPOoD/f+iXk/ax+HY6ddaDT2F3ECw5WY7RdA710aRc/0E1ShHyKiZ2660gUcR/p+XckUHPfy22TJZQtDcQ==
 
+react-speech-recognition@^2.0.4:
+  version "2.0.4"
+  resolved "https://registry.yarnpkg.com/react-speech-recognition/-/react-speech-recognition-2.0.4.tgz#34ae2652cacef7ca6ca1c57659ded2fafec4c16d"
+  integrity sha512-CVIcNZuRf/zbsg2bMIOxwLTHvHVlcCXlB8DaVPdqKhNFJNeIOVcuNX1Lc4925HTDO1ZkQiaMD/xadMmYdx3DHQ==
+
 react-text-mask@^5.4.3:
   version "5.4.3"
   resolved "https://registry.yarnpkg.com/react-text-mask/-/react-text-mask-5.4.3.tgz#991efb4299e30c2e6c2c46d13f617169463e0d2d"

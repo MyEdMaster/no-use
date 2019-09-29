@@ -39,7 +39,7 @@ export class Nav extends React.Component {
                         <div>
                             <a
                                 className="py-3"
-                                href="/home"
+                                href="/"
                                 style={{
                                     cursor:'pointer',
                                     fontFamily:'Comic Sans MS',

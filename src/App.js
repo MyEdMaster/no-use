@@ -7,16 +7,22 @@ import 'react-animated-router/animate.css';
 import {RRH} from "./page/RRH";
 import {HomePage} from "./page/HomePage";
 import {ComplexNumber} from "./page/ComplexNumber";
+import {TestPage} from "./page/test-page";
 
 export class App extends Component {
     render() {
         return (
-            <HashRouter onUpdate={() => window.scrollTo(0, 0)}>
+            <Route>
                 <Switch>
                     <Route
                         path="/home"
                         component={routeProps => <HomePage {...routeProps} />}
                     />
+                    <Route
+                        path="/test"
+                        component={routeProps => <TestPage {...routeProps} />}
+                    />
+
                     <Route
                         path="/rrh"
                         component={routeProps => <RRH {...routeProps} />}
@@ -27,7 +33,7 @@ export class App extends Component {
                     />
                     <Redirect to="/home"/>
                 </Switch>
-            </HashRouter>
+            </Route>
 
         );
     }

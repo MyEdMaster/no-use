@@ -4,23 +4,27 @@ import {MDBRow, MDBCol,MDBBtn} from 'mdbreact'
 
 import classes from './index.module.css'
 import {InlineMath} from "react-katex";
-import {SpeakRecog} from "../../SpeakModule";
 
 
 export class ComplexHome extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            test:'',
+            render:0
 
         };
     }
+
+
+
 
     render() {
 
         return (
 
             <div>
-                <SpeakRecog/>
+
                 <div className={classes.font}>
                     A-List Empire:
                 </div>
