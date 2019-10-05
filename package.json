@@ -14,7 +14,8 @@
     "react-speech-kit": "^2.0.2",
     "react-speech-recognition": "^2.0.4",
     "react-transition-group": "^2.3.0",
-    "video-react": "^0.14.1"
+    "video-react": "^0.14.1",
+    "webkit": "^0.0.0"
   },
   "scripts": {
     "start": "react-scripts start",

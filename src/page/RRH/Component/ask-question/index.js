@@ -96,13 +96,6 @@ export class AskQuestion extends React.Component {
                 </div>
                 <MDBModal isOpen={this.state.modal1} toggle={this.toggle(1)} frame position="top">
                     <MDBModalBody className="text-center">
-                        <SpeakRecog
-                            recog={(value)=>{
-                                this.setState({
-                                    redQuestion: value
-                                });
-                            }}
-                        />
                         <div className="d-flex justify-content-center align-items-center">
                             <div className="px-3">
                                 <img src={llrh} alt="Little Red Riding Hood" height="71" width="50"/>
@@ -111,20 +104,21 @@ export class AskQuestion extends React.Component {
                                 Try asking Little Red Riding Hood a question:
                             </div>
                             <div className="ml-3">
-                                <input
-                                    className={` px-5 form-control form-control-lg ${classes.searchInput}`}
+                                <SpeakRecog/>
+                                {/*<input*/}
+                                    {/*className={`form-control form-control-lg ${classes.searchInput}`}*/}
 
-                                    style={{
-                                        fontSize: '1.09vw',
-                                        width: '30vw'
-                                    }}
-                                    onChange={(e) => {
-                                        const str=e.target.value
-                                        this.setState({
-                                            redQuestion: str
-                                        });
-                                    }}
-                                />
+                                    {/*style={{*/}
+                                        {/*fontSize: '1.09vw',*/}
+                                        {/*width: '30vw'*/}
+                                    {/*}}*/}
+                                    {/*onChange={(e) => {*/}
+                                        {/*const str=e.target.value*/}
+                                        {/*this.setState({*/}
+                                            {/*redQuestion: str*/}
+                                        {/*});*/}
+                                    {/*}}*/}
+                                {/*/>*/}
                             </div>
                             <div className="ml-3">
                                 <MDBBtn

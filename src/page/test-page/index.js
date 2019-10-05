@@ -1,7 +1,6 @@
 import React from "react";
 import {Test} from "../Test";
 
-import {TestClass} from "../Test2";
 
 export class TestPage extends React.Component {
     constructor(props) {
@@ -20,8 +19,7 @@ export class TestPage extends React.Component {
                 This is a test page
                 <Test/>
 
-
-                <TestClass/>
+                {/*<Speech/>*/}
 
             </div>
 
