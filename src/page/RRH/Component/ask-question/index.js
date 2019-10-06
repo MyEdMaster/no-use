@@ -28,7 +28,8 @@ export class AskQuestion extends React.Component {
             tag:1,
             defaultQuestion:'',
             listening: false,
-            speechState:'Click to start...'
+            speechState:'Click to start...',
+            hints:''
 
         };
         this.toggleListen = this.toggleListen.bind(this)
@@ -58,9 +59,10 @@ export class AskQuestion extends React.Component {
             .then(answer=>{
                 if (answer.substr(0, 1) === '0'){
 
-                    let text="Is this the question you want to ask?\n"+answer.substring(1,answer.length)
+
                     this.setState({
-                        answer:text,
+                        hints:'Is this the question you want to ask?',
+                        answer:answer.substring(1,answer.length),
                         tag:0,
                         defaultQuestion:answer.substring(1,answer.length)
                     })
@@ -87,7 +89,8 @@ export class AskQuestion extends React.Component {
             .then(newanswer=>{
                 this.setState({
                     answer:'Answer:'+newanswer.substring(1,newanswer.length),
-                    tag:1
+                    tag:1,
+                    hints:''
                 })
             })
     };
@@ -245,36 +248,41 @@ export class AskQuestion extends React.Component {
                                 className="py-3 px-3 w-100 green lighten-2"
                                 style={{boxShadow:'none', borderRadius:'15px',}}
                             >
-                                <p  style={{borderStyle:'solid',borderColor:'white',borderWidth:'0 0 1px 0'}}>Hints/Answer</p>
-                                <p>{this.state.answer}</p>
+                                <p
+                                    style={{borderStyle:'solid',borderColor:'white',borderWidth:'0 0 1px 0'}}
+                                    className={classes.pb1}
+                                >Hints/Answer</p>
+                                <p className={classes.pb3}>{this.state.hints}</p>
+                                <p className={classes.pb2}>{this.state.answer}</p>
+                                <div>
+                                    {this.state.tag<1? (
+                                        <div className="d-flex justify-content-center align-items-center">
+                                            <MDBBtn
+                                                color="primary"
+                                                size="sm"
+                                                onClick={()=>{this.searchAgain(this.state.defaultQuestion)}}
+                                            >
+                                                YES
+                                            </MDBBtn>
+                                            <MDBBtn
+                                                size="sm"
+                                                onClick={()=>{
+                                                    this.setState({
+                                                        answer:'Sorry, we cannot find the answer',
+                                                        tag:1
+                                                    })
+                                                }}
+                                            >
+                                                NO
+                                            </MDBBtn>
+
+                                        </div>
+                                    ):(null)
+                                    }
+                                </div>
                             </MDBCard>
                         </div>
-                        <div>
-                            {this.state.tag<1? (
-                                <div className="d-flex justify-content-center align-items-center">
-                                    <MDBBtn
-                                        color="primary"
-                                        size="sm"
-                                        onClick={()=>{this.searchAgain(this.state.defaultQuestion)}}
-                                    >
-                                        YES
-                                    </MDBBtn>
-                                    <MDBBtn
-                                        size="sm"
-                                        onClick={()=>{
-                                            this.setState({
-                                                answer:'Sorry, we cannot find the answer',
-                                                tag:1
-                                            })
-                                        }}
-                                    >
-                                        NO
-                                    </MDBBtn>
 
-                                </div>
-                            ):(null)
-                          }
-                        </div>
                         {/*{this.state.change?(*/}
                             {/*null*/}
                         {/*):(*/}
