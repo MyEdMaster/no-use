@@ -19,7 +19,7 @@ export class Audio extends React.Component {
                <audio
                    style={{height:"3vw"}}
                    src={this.props.audio}
-                   autoPlay={true}
+                   autoPlay={false}
                    controls={true}
                />
            </div>

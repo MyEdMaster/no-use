@@ -69,7 +69,7 @@ export class AskQuestion extends React.Component {
                 }
                 else{
                     this.setState({
-                        answer:'Answer:'+answer.substring(1,answer.length)
+                        answer:answer.substring(1,answer.length)
                     })
                 }
 
@@ -88,7 +88,7 @@ export class AskQuestion extends React.Component {
             .then(response=>response.text())
             .then(newanswer=>{
                 this.setState({
-                    answer:'Answer:'+newanswer.substring(1,newanswer.length),
+                    answer:newanswer.substring(1,newanswer.length),
                     tag:1,
                     hints:''
                 })
@@ -258,14 +258,13 @@ export class AskQuestion extends React.Component {
                                     {this.state.tag<1? (
                                         <div className="d-flex justify-content-center align-items-center">
                                             <MDBBtn
-                                                color="primary"
-                                                size="sm"
+                                                tag="a" floating className="green"
                                                 onClick={()=>{this.searchAgain(this.state.defaultQuestion)}}
                                             >
-                                                YES
+                                                <MDBIcon icon="check" />
                                             </MDBBtn>
                                             <MDBBtn
-                                                size="sm"
+                                                tag="a" floating className="red"
                                                 onClick={()=>{
                                                     this.setState({
                                                         answer:'Sorry, we cannot find the answer',
@@ -273,8 +272,26 @@ export class AskQuestion extends React.Component {
                                                     })
                                                 }}
                                             >
-                                                NO
+                                                <MDBIcon icon="times" />
                                             </MDBBtn>
+                                            {/*<MDBBtn*/}
+                                            {/*    color="primary"*/}
+                                            {/*    size="sm"*/}
+                                            {/*    onClick={()=>{this.searchAgain(this.state.defaultQuestion)}}*/}
+                                            {/*>*/}
+                                            {/*    YES*/}
+                                            {/*</MDBBtn>*/}
+                                            {/*<MDBBtn*/}
+                                            {/*    size="sm"*/}
+                                            {/*    onClick={()=>{*/}
+                                            {/*        this.setState({*/}
+                                            {/*            answer:'Sorry, we cannot find the answer',*/}
+                                            {/*            tag:1*/}
+                                            {/*        })*/}
+                                            {/*    }}*/}
+                                            {/*>*/}
+                                            {/*    NO*/}
+                                            {/*</MDBBtn>*/}
 
                                         </div>
                                     ):(null)
@@ -360,15 +377,15 @@ export class AskQuestion extends React.Component {
                         <div>
                             {this.state.tag<1? (
                                 <div className="d-flex justify-content-center align-items-center">
+
                                     <MDBBtn
-                                        color="primary"
-                                        size="sm"
+                                        tag="a" floating className="green"
                                         onClick={()=>{this.searchAgain(this.state.defaultQuestion)}}
                                     >
-                                        YES
+                                    <MDBIcon icon="check" />
                                     </MDBBtn>
                                     <MDBBtn
-                                        size="sm"
+                                        tag="a" floating className="red lighten-1"
                                         onClick={()=>{
                                             this.setState({
                                                 answer:'Sorry, we cannot find the answer',
@@ -376,9 +393,22 @@ export class AskQuestion extends React.Component {
                                             })
                                         }}
                                     >
-                                        NO
+                                    <MDBIcon icon="times" />
                                     </MDBBtn>
 
+                                    {/*<MDBBtn*/}
+                                    {/*    color="primary"*/}
+                                    {/*    size="sm"*/}
+                                    {/*    */}
+                                    {/*>*/}
+                                    {/*    YES*/}
+                                    {/*</MDBBtn>*/}
+                                    {/*<MDBBtn*/}
+                                    {/*    size="sm"*/}
+                                    {/*   */}
+                                    {/*>*/}
+                                    {/*    NO*/}
+                                    {/*</MDBBtn>*/}
                                 </div>
                             ):(null)
                             }
