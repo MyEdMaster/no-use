@@ -20,14 +20,16 @@ export class ComplexPage3 extends React.Component {
             value:'',
             step:1,
             hint:'',
-            isRight:true
+            isRight:true,
+            finish:false,
+            finishText:'',
         };
 
     }
     toggle = nr => () => {
         let modalNumber = 'modal' + nr
         this.setState({
-            [modalNumber]: !this.state[modalNumber]
+            [modalNumber]: !this.state[modalNumber],
         });
     }
     handleChange(event) {
@@ -55,7 +57,7 @@ export class ComplexPage3 extends React.Component {
             .then(response=>response.text())
             .then(answer=>{
                 this.setState({
-                    hint:answer.substring(1,answer.length)
+                    hint:answer.substring(2,answer.length)
                 })
                 if (answer.substr(0, 1) === '0'){
                     this.setState({
@@ -64,9 +66,14 @@ export class ComplexPage3 extends React.Component {
                 }
                 if (answer.substr(0, 1) === '1'){
                     let arr = this.state.answers;
-                    let step= this.state.step;
-                    arr.push(this.state.value)
-                    step = step + 1
+                    let step= answer.substr(1,1)
+                    if (step === '6'){
+                        this.setState({
+                            finish:true,
+                            finishText:'Finished! You got it.'
+                        })
+                    }
+                    arr.push([step, this.state.value])
                     this.setState({
                         answers:arr,
                         step:step,
@@ -362,7 +369,14 @@ export class ComplexPage3 extends React.Component {
                                 <MDBBtn
                                     className="orange accent-2"
                                     size="md"
-                                    onClick={this.toggle(14)}
+                                    onClick={()=>{
+                                        this.setState({
+                                            modal14:false,
+                                            answers:[],
+                                            finish:false,
+                                            step:1
+                                        })
+                                    }}
                                     style={{
                                         fontFamily:'\'Roboto\',sans-serif',
                                         fontSize:'12px',
@@ -392,75 +406,84 @@ export class ComplexPage3 extends React.Component {
                                             fontWeight:'bolder'
                                         }}
                                     >
-                                            <span style={{fontWeight:'bold',color:'#388e3c'}}>Step{index+1}</span> &nbsp;{item}
+                                            <span style={{fontWeight:'bold',color:'#388e3c'}}>Step{item[0]-1}</span> &nbsp;{item[1]}
 
                                     </div>
                                 })}
                             </div>
+                            {!this.state.finish?(
+                                <div className="px-3 d-flex align-items-baseline">
 
-                            <div className="px-3 d-flex align-items-baseline">
+                                    <div className="flex-grow-1">
 
-                                <div className="flex-grow-1">
-                                    <MDBInput
-                                        label={`Step ${this.state.step.toString()}`}
-                                        className="mr-3"
-                                        size="sm"
-                                        value={this.state.value}
-                                        style={this.state.isRight?{
-                                            border:'solid',
-                                            borderColor:'#81c784',
-                                            borderWidth:'0 0 2px 0',
-                                            fontFamily:'\'Roboto\',sans-serif',
-                                            fontSize:'18px'
-                                        }:{
-                                            border:'solid',
-                                            borderColor:'#d32f2f',
-                                            borderWidth:'0 0 2px 0',
-                                            fontFamily:'\'Roboto\',sans-serif',
-                                            fontSize:'18px'
-                                        }}
-                                        onChange={(e) => {
-                                            this.setState({
-                                                value: e.target.value
-                                            });
-                                        }}
-                                    />
+                                        <MDBInput
+                                            label={`Step ${this.state.step.toString()}`}
+                                            className="mr-3"
+                                            size="sm"
+                                            value={this.state.value}
+                                            style={this.state.isRight ?{
+                                                border:'solid',
+                                                borderColor:'#81c784',
+                                                borderWidth:'0 0 2px 0',
+                                                fontFamily:'\'Roboto\',sans-serif',
+                                                fontSize:'18px'
+                                            }:{
+                                                border:'solid',
+                                                borderColor:'#d32f2f',
+                                                borderWidth:'0 0 2px 0',
+                                                fontFamily:'\'Roboto\',sans-serif',
+                                                fontSize:'18px'
+                                            }}
+                                            onChange={(e) => {
+                                                this.setState({
+                                                    value: e.target.value
+                                                });
+                                            }}
+                                        />
+
+                                    </div>
+                                    <div className="ml-4">
+                                        <MDBBtn
+                                            tag="a" floating className=" green lighten-2 m-0"
+                                            onClick={()=>{this.post()}}
+                                        >
+                                            <MDBIcon icon="clipboard-check" />
+                                        </MDBBtn>
+                                        {/*<MDBBtn*/}
+                                        {/*tag="a" floating className=" orange lighten-2"*/}
+                                        {/*>*/}
+                                        {/*<MDBIcon icon="microphone" />*/}
+                                        {/*</MDBBtn>*/}
+                                    </div>
+
                                 </div>
+                            ):(
+                                <p className={classes.pb4}>Finished! You got it</p>
+                                )}
+
+
+
+                            <div className="px-3 pt-3">
+                                <MDBCard
+                                    size="8"
+                                    text="white"
+                                    className="py-3 px-3 w-100 green lighten-3"
+                                    style={{boxShadow:'none', borderRadius:'0'}}
+                                >
+                                    <p className={classes.pb}>Hints/Feedback</p>
+                                    <p className={classes.pb2}>{this.state.hint}</p>
+                                    {/*<MDBRow center>*/}
+                                    {/*<MDBBtn tag="a" floating disabled className="grey lighten-1">*/}
+                                    {/*<MDBIcon icon="angle-left" />*/}
+                                    {/*</MDBBtn>*/}
+                                    {/*<MDBBtn tag="a" floating disabled className="grey lighten-1">*/}
+                                    {/*<MDBIcon icon="angle-right" />*/}
+                                    {/*</MDBBtn>*/}
+                                    {/*</MDBRow>*/}
+                                </MDBCard>
                             </div>
 
-                            <MDBRow center>
-                                <MDBBtn
-                                    tag="a" floating className=" green lighten-2"
-                                    onClick={()=>{this.post()}}
-                                >
-                                    <MDBIcon icon="clipboard-check" />
-                                </MDBBtn>
-                                <MDBBtn
-                                    tag="a" floating className=" orange lighten-2"
-                                >
-                                    <MDBIcon icon="microphone" />
-                                </MDBBtn>
-                            </MDBRow>
                         </div>
-                        <br/>
-                        <MDBCard
-                            size="8"
-                            text="white"
-                            className="py-3 px-3 w-100 green lighten-2"
-                            style={{boxShadow:'none', borderRadius:'0'}}
-                        >
-                            <p className={classes.pb}>Hints/Feedback</p>
-                            <p className={classes.pb2}>{this.state.hint}</p>
-                            <MDBRow center>
-                                <MDBBtn tag="a" floating disabled className="grey lighten-1">
-                                    <MDBIcon icon="angle-left" />
-                                </MDBBtn>
-                                <MDBBtn tag="a" floating disabled className="grey lighten-1">
-                                    <MDBIcon icon="angle-right" />
-                                </MDBBtn>
-                            </MDBRow>
-
-                        </MDBCard>
                     </MDBCol>
 
                 </MDBRow>

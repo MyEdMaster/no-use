@@ -107,6 +107,12 @@
     font-weight: bolder;
     text-align: center;
 }
+.ph{
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 30px;
+    font-weight: bolder;
+    text-align: center;
+}
 .high{
     color:#F1831D;
 }
@@ -132,6 +138,15 @@
     color:#ffd180;
     transition: all 0.2s ease-in-out;
 }
+.pb4{
+    font-family: 'Roboto',sans-serif ;
+    font-weight: bolder;
+    font-size: 24px;
+    color:#66bb6a;
+    margin-top: 10px;
+    text-align: center;
+}
+
 .ws{
     font-family: 'Roboto',sans-serif ;
     font-weight: bold;

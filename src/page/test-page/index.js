@@ -1,5 +1,6 @@
 import React from "react";
-import {Test} from "../Test";
+import {Test} from "../../Playground/Test";
+import {Speech} from "../SpeechDemo";
 
 
 export class TestPage extends React.Component {
@@ -19,7 +20,7 @@ export class TestPage extends React.Component {
                 This is a test page
                 <Test/>
 
-                {/*<Speech/>*/}
+                <Speech/>
 
             </div>
 

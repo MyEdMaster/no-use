@@ -1,9 +1,19 @@
+'use strict'
 import React from 'react';
 import classes from './index.module.css';
 import llrh from '../../Lib/llrh.jpg';
 import bbw from '../../Lib/bbw.jpg';
-import { MDBBtn, MDBModal, MDBModalBody } from 'mdbreact';
-import {SpeakRecog} from "../SpeakRRH";
+import {MDBBtn, MDBCard,MDBIcon, MDBModal, MDBModalBody} from 'mdbreact';
+
+//------------------------SPEECH RECOGNITION-----------------------------
+
+const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+const recognition = new SpeechRecognition();
+
+recognition.continous = true;
+recognition.interimResults = true;
+recognition.lang = 'en-US';
+
 
 export class AskQuestion extends React.Component {
     constructor(props) {
@@ -16,9 +26,13 @@ export class AskQuestion extends React.Component {
             answer:'',
             change:false,
             tag:1,
-            defaultQuestion:''
+            defaultQuestion:'',
+            listening: false,
+            speechState:'Click to start...'
 
         };
+        this.toggleListen = this.toggleListen.bind(this)
+        this.handleListen = this.handleListen.bind(this)
 
     }
     myClick=(text)=>{
@@ -77,10 +91,75 @@ export class AskQuestion extends React.Component {
                 })
             })
     };
-    onRecog=(value)=>{
+    //--------------Speech Recognition--------------
+    toggleListen() {
         this.setState({
-            redQuestion: value
-        });
+            listening: !this.state.listening
+        }, this.handleListen)
+    }
+
+    handleListen() {
+
+        console.log('listening?', this.state.listening)
+
+        if (this.state.listening) {
+            recognition.start();
+            recognition.onend = () => {
+                this.setState({
+                    speechState:'...continue listening...'
+                });
+                recognition.start()
+            }
+
+        } else {
+            recognition.stop();
+            recognition.onend = () => {
+                this.setState({
+                    speechState:'Click to start...'
+                });
+            }
+        }
+
+        recognition.onstart = () => {
+            this.setState({
+                speechState:'Listening...Click to pause'
+            });
+        }
+
+        let finalTranscript = '';
+        recognition.onresult = event => {
+            let interimTranscript = '';
+
+            for (let i = event.resultIndex; i < event.results.length; i++) {
+                const transcript = event.results[i][0].transcript;
+                if (event.results[i].isFinal) finalTranscript += transcript + ' ';
+                else interimTranscript += transcript;
+            }
+            document.getElementById('interim').innerHTML = interimTranscript;
+            document.getElementById('final').value = finalTranscript;
+
+            //-------------------------COMMANDS------------------------------------
+
+            const transcriptArr = finalTranscript.split(' ');
+            const stopCmd = transcriptArr.slice(-3, -1);
+            console.log('stopCmd', stopCmd);
+
+            if (stopCmd[0] === 'stop' && stopCmd[1] === 'listening'){
+                recognition.stop();
+                recognition.onend = () => {
+                    console.log('Stopped listening per command');
+                    const finalText = transcriptArr.slice(0, -3).join(' ');
+                    document.getElementById('final').value = finalText
+                }
+            }
+        }
+
+        //-----------------------------------------------------------------------
+
+        recognition.onerror = event => {
+            console.log("Error occurred in recognition: " + event.error)
+        }
+
     }
 
     render() {
@@ -94,45 +173,70 @@ export class AskQuestion extends React.Component {
                     <button className="button button" onClick={this.toggle(2)}><img
                         src={bbw} alt="Big Bad Wolf" height="142" width="100"/></button>
                 </div>
-                <MDBModal isOpen={this.state.modal1} toggle={this.toggle(1)} frame position="top">
-                    <MDBModalBody className="text-center">
-                        <div className="d-flex justify-content-center align-items-center">
-                            <div className="px-3">
-                                <img src={llrh} alt="Little Red Riding Hood" height="71" width="50"/>
-                            </div>
-                            <div>
-                                Try asking Little Red Riding Hood a question:
-                            </div>
-                            <div className="ml-3">
-                                <SpeakRecog/>
-                                {/*<input*/}
-                                    {/*className={`form-control form-control-lg ${classes.searchInput}`}*/}
+                <MDBModal isOpen={this.state.modal1} toggle={this.toggle(1)} centered size="lg">
 
-                                    {/*style={{*/}
-                                        {/*fontSize: '1.09vw',*/}
-                                        {/*width: '30vw'*/}
-                                    {/*}}*/}
-                                    {/*onChange={(e) => {*/}
-                                        {/*const str=e.target.value*/}
-                                        {/*this.setState({*/}
-                                            {/*redQuestion: str*/}
-                                        {/*});*/}
-                                    {/*}}*/}
-                                {/*/>*/}
+                    <MDBModalBody className="text-center">
+                        <div className={classes.title}>
+                            <span>TRY ASKING</span>
+                            <img src={llrh} alt="Little Red Riding Hood" height="71" width="50"/>
+                            <span >A QUESTION</span>
+                        </div>
+
+                        <div className="d-flex justify-content-center align-content-center mt-5 mb-3">
+                            <div className="flex-grow-1">
+                                <input
+                                    id='final'
+                                    className={`form-control form-control-lg ${classes.searchInput}`}
+                                    placeholder="Ask your question here"
+                                    style={{
+                                        borderStyle:'solid',
+                                        borderWidth:'1px',
+                                        borderColor:'#81c784',
+                                        borderRadius:'15px',
+                                        fontFamily:'\'Rajdhani\', sans-serif',
+                                        fontSize:'20px',
+                                    }}
+                                    onChange={(e) => {
+                                        const str=e.target.value
+                                        this.setState({
+                                            redQuestion: str
+                                        });
+                                    }}
+                                />
                             </div>
                             <div className="ml-3">
                                 <MDBBtn
-                                    color="primary"
-                                    size="sm"
+                                    tag="a" floating color="green lighten-2" style={{margin:'6px'}}
+                                    onClick={this.toggleListen}
+                                >
+                                    <MDBIcon icon="microphone" />
+                                </MDBBtn>
+                            </div>
+                            <div className="ml-2">
+                                <MDBBtn
+                                    tag="a" floating color="deep-purple" style={{margin:'6px'}}
                                     onClick={()=>{this.searchAnswer(this.state.redQuestion)}}
                                 >
-                                    Ask
+                                    <MDBIcon icon="question" />
                                 </MDBBtn>
                             </div>
                         </div>
-                        <p >
-                           {this.state.answer}
-                        </p>
+                        <div className={classes.speechBorder}>
+                            <div className={classes.body}>{this.state.speechState}</div>
+                            <div id='interim'></div>
+                        </div>
+
+                        <div className="mt-3">
+                            <MDBCard
+                                size="8"
+                                text="white"
+                                className="py-3 px-3 w-100 green lighten-2"
+                                style={{boxShadow:'none', borderRadius:'15px',}}
+                            >
+                                <p  style={{borderStyle:'solid',borderColor:'white',borderWidth:'0 0 1px 0'}}>Hints/Answer</p>
+                                <p>{this.state.answer}</p>
+                            </MDBCard>
+                        </div>
                         <div>
                             {this.state.tag<1? (
                                 <div className="d-flex justify-content-center align-items-center">
@@ -169,37 +273,70 @@ export class AskQuestion extends React.Component {
                         {/*)}*/}
                     </MDBModalBody>
                 </MDBModal>
-                <MDBModal isOpen={this.state.modal2} toggle={this.toggle(2)} frame position="top">
-                    <MDBModalBody className="text-center">
-                        <div className="d-flex justify-content-center align-items-center">
-                            <div className="px-3">
-                                <img src={bbw} alt="Little Red Riding Hood" height="71" width="50"/>
-                            </div>
-                            <div>
-                                Try asking the Big Bad Wolf a question!
-                            </div>
-                            <div className="ml-3">
-                                <input
-                                    className={` px-5 form-control form-control-lg ${classes.searchInput}`}
+                <MDBModal isOpen={this.state.modal2} toggle={this.toggle(2)} centered size="lg">
 
+                    <MDBModalBody className="text-center">
+                        <div className={classes.title} style={{color:'#7e57c2', borderColor:'#7e57c2'}}>
+                            <span>TRY ASKING</span>
+                            <img src={bbw} alt="Little Red Riding Hood" height="71" width="50"/>
+                            <span >A QUESTION</span>
+                        </div>
+
+                        <div className="d-flex justify-content-center align-content-center mt-5 mb-3">
+                            <div className="flex-grow-1">
+                                <input
+                                    id='final'
+                                    className={`form-control form-control-lg ${classes.searchInput}`}
+                                    placeholder="Ask your question here"
                                     style={{
-                                        fontSize: '1.09vw',
-                                        width: '30vw'
+                                        borderStyle:'solid',
+                                        borderWidth:'1px',
+                                        borderColor:'#7e57c2',
+                                        borderRadius:'15px',
+                                        fontFamily:'\'Rajdhani\', sans-serif',
+                                        fontSize:'20px',
                                     }}
                                     onChange={(e) => {
+                                        const str=e.target.value
                                         this.setState({
-                                            wolfQuestion: e.target.value
+                                            wolfQuestion: str
                                         });
                                     }}
                                 />
                             </div>
                             <div className="ml-3">
-                                <MDBBtn color="primary" size="sm" onClick={()=>{this.searchAnswer(this.state.wolfQuestion)}}>Ask</MDBBtn>
+                                <MDBBtn
+                                    tag="a" floating color="green lighten-2" style={{margin:'6px'}}
+                                    onClick={this.toggleListen}
+                                >
+                                    <MDBIcon icon="microphone" />
+                                </MDBBtn>
+                            </div>
+                            <div className="ml-2">
+                                <MDBBtn
+                                    tag="a" floating color="purple lighten-2" style={{margin:'6px'}}
+                                    onClick={()=>{this.searchAnswer(this.state.wolfQuestion)}}
+                                >
+                                    <MDBIcon icon="question" />
+                                </MDBBtn>
                             </div>
                         </div>
-                        <p className={classes.title}>
-                            {this.state.answer}
-                        </p>
+                        <div className={classes.speechBorder} >
+                            <div className={classes.body}>{this.state.speechState}</div>
+                            <div id='interim'></div>
+                        </div>
+
+                        <div className="mt-3">
+                            <MDBCard
+                                size="8"
+                                text="white"
+                                className="py-3 px-3 w-100 purple lighten-2"
+                                style={{boxShadow:'none', borderRadius:'15px',}}
+                            >
+                                <p  style={{borderStyle:'solid',borderColor:'white',borderWidth:'0 0 1px 0'}}>Hints/Answer</p>
+                                <p>{this.state.answer}</p>
+                            </MDBCard>
+                        </div>
                         <div>
                             {this.state.tag<1? (
                                 <div className="d-flex justify-content-center align-items-center">
@@ -221,12 +358,22 @@ export class AskQuestion extends React.Component {
                                     >
                                         NO
                                     </MDBBtn>
+
                                 </div>
                             ):(null)
                             }
                         </div>
+                        {/*{this.state.change?(*/}
+                        {/*null*/}
+                        {/*):(*/}
+
+                        {/*<p>*/}
+                        {/*{this.state.answer}*/}
+                        {/*</p>*/}
+                        {/*)}*/}
                     </MDBModalBody>
                 </MDBModal>
+
             </div>
         );
     }

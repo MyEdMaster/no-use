@@ -1,10 +1,31 @@
+@import url('https://fonts.googleapis.com/css?family=Rajdhani&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
+@font-face {
+    font-family:'Rajdhani', sans-serif;
+    src: url('https://fonts.googleapis.com/css?family=Rajdhani&display=swap')
+}
+@font-face {
+    font-family:'Roboto', sans-serif;
+    src: url('https://fonts.googleapis.com/css?family=Roboto&display=swap')
+}
+
 .body{
     background: #e8eaf6;
-    font-family: "Georgia", serif;
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 500;
+    font-variant: normal;
+    line-height: 30px;
 }
 
 .title{
-    font-family: "Georgia", serif;
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 60px;
+    font-style: normal;
+    font-weight: 500;
+    font-variant: normal;
+    line-height: 30px;
     color: #E71D36;
 }
 .button {

@@ -63,14 +63,6 @@ export class ComplexPage4 extends React.Component {
                                     <MDBBtn color=" brown lighten-1" className={`${classes.btn} mt-3 white-text`}>Next Question</MDBBtn>
                                 </div>
                             </div>
-
-
-
-
-
-
-
-
                         </div>
 
                         <br/>

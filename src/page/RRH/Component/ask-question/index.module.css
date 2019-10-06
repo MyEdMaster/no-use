@@ -1,10 +1,22 @@
 .body{
     background: #ffffcc;
-    font-family: "Georgia", serif;
+    font-family: 'Rajdhani', sans-serif;
+}
+.speechBorder{
+    /*border-style:solid;*/
+    /*border-width:1px;*/
+    /*border-color:#81c784;*/
+    /*border-radius:15px;*/
+    /*font-family:'Rajdhani', sans-serif;*/
 }
 .title{
-    font-family: "Georgia", serif;
-    color: #E71D36;
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 30px;
+    color: #81c784;
+    text-align: center;
+    border-style: solid;
+    border-color: #81c784;
+    border-width: 0 0 1px 0;
 }
 .button {
     display: inline-block;
@@ -15,6 +27,17 @@
     width: 100px;
     opacity: 1;
     transition: 0.5s;
+}
+.btn{
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 14px;
+    background-color: #7e57c2;
+    border-radius: 10px;
+    text-align: center;
+}
+.btn:hover{
+    border-radius: 20px;
+    transition: all 0.2s ease-in-out;
 }
 .button:hover {background-color: #FFDC00}
 .button1 {
@@ -34,7 +57,7 @@
 }
 .button1:hover {background-color: #FFDC00}
 .searchInput {
-    margin-bottom: 0;
+    margin: 6px;
     box-shadow: 1px 1px 1px #E3E7F5;
     border-style:solid;
     border-width:2px;
