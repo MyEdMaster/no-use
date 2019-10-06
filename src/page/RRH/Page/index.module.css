@@ -18,7 +18,10 @@
     font-variant: normal;
     line-height: 30px;
 }
-
+.body2{
+    background: #ffffcc;
+    font-family: 'Rajdhani', sans-serif;
+}
 .title{
     font-family: 'Rajdhani', sans-serif;
     font-size: 60px;
@@ -98,4 +101,35 @@
 .next:hover {
     transition: font-weight 0.5s;
     font-weight: bold;
+}
+.border{
+    margin: 20px 0;
+
+    border-style:solid;
+    border-width:3px;
+    border-radius: 20px;
+    border-color: #54B948;
+    padding: 10px 15px;
+}
+.ph{
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 24px;
+    font-weight: bolder;
+
+}
+.pb1{
+    font-family: 'Roboto',sans-serif ;
+    font-weight: bolder;
+    font-size: 24px;
+    color:#54B948;
+    margin-top: 10px;
+    text-align: center;
+}
+.pb2{
+    font-family: 'Roboto',sans-serif ;
+    font-weight: bolder;
+    font-size: 18px;
+    color:#54B948;
+    margin-top: 10px;
+    text-align: left;
 }

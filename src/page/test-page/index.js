@@ -1,6 +1,7 @@
 import React from "react";
 import {Test} from "../../Playground/Test";
-import {Speech} from "../SpeechDemo";
+import {Speech} from "../SpeechRecog-demo"
+import {SpeechSyn} from "../SpeechSyn-demo";
 
 
 export class TestPage extends React.Component {
@@ -21,6 +22,7 @@ export class TestPage extends React.Component {
                 <Test/>
 
                 <Speech/>
+                <SpeechSyn/>
 
             </div>
 

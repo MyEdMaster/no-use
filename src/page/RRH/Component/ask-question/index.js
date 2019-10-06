@@ -4,6 +4,7 @@ import classes from './index.module.css';
 import llrh from '../../Lib/llrh.jpg';
 import bbw from '../../Lib/bbw.jpg';
 import {MDBBtn, MDBCard,MDBIcon, MDBModal, MDBModalBody} from 'mdbreact';
+import {handleListen} from "../speech-syn";
 
 //------------------------SPEECH RECOGNITION-----------------------------
 
@@ -66,11 +67,14 @@ export class AskQuestion extends React.Component {
                         tag:0,
                         defaultQuestion:answer.substring(1,answer.length)
                     })
+                    handleListen('Is this the question you want to ask')
+                    handleListen(answer.substring(1,answer.length))
                 }
                 else{
                     this.setState({
                         answer:answer.substring(1,answer.length)
                     })
+                    handleListen(answer.substring(1,answer.length))
                 }
 
             })
@@ -92,6 +96,7 @@ export class AskQuestion extends React.Component {
                     tag:1,
                     hints:''
                 })
+                handleListen(answer.substring(1,answer.length))
             })
     };
     //--------------Speech Recognition--------------
@@ -221,19 +226,20 @@ export class AskQuestion extends React.Component {
                             </div>
                             <div className="ml-3">
                                 <MDBBtn
-                                    tag="a" floating color="green lighten-2" style={{margin:'6px'}}
-                                    onClick={this.toggleListen}
-                                >
-                                    <MDBIcon icon="microphone" />
-                                </MDBBtn>
-                            </div>
-                            <div className="ml-2">
-                                <MDBBtn
-                                    tag="a" floating color="deep-purple" style={{margin:'6px'}}
+                                    tag="a" floating color="green" style={{margin:'6px'}}
                                     onClick={()=>{this.searchAnswer(this.state.redQuestion)}}
                                 >
                                     <MDBIcon icon="question" />
                                 </MDBBtn>
+                            </div>
+                            <div className="ml-1">
+                                <MDBBtn
+                                    tag="a" floating color="purple lighten-2" style={{margin:'6px'}}
+                                    onClick={this.toggleListen}
+                                >
+                                    <MDBIcon icon="microphone" />
+                                </MDBBtn>
+
                             </div>
                         </div>
                         <div className={classes.speechBorder}>
@@ -252,7 +258,9 @@ export class AskQuestion extends React.Component {
                                     style={{borderStyle:'solid',borderColor:'white',borderWidth:'0 0 1px 0'}}
                                     className={classes.pb1}
                                 >Hints/Answer</p>
-                                <p className={classes.pb3}>{this.state.hints}</p>
+                                {this.state.tag<1? (
+                                    <p className={classes.pb3}>{this.state.hints}</p>
+                                ):(null)}
                                 <p className={classes.pb2}>{this.state.answer}</p>
                                 <div>
                                     {this.state.tag<1? (
@@ -274,25 +282,6 @@ export class AskQuestion extends React.Component {
                                             >
                                                 <MDBIcon icon="times" />
                                             </MDBBtn>
-                                            {/*<MDBBtn*/}
-                                            {/*    color="primary"*/}
-                                            {/*    size="sm"*/}
-                                            {/*    onClick={()=>{this.searchAgain(this.state.defaultQuestion)}}*/}
-                                            {/*>*/}
-                                            {/*    YES*/}
-                                            {/*</MDBBtn>*/}
-                                            {/*<MDBBtn*/}
-                                            {/*    size="sm"*/}
-                                            {/*    onClick={()=>{*/}
-                                            {/*        this.setState({*/}
-                                            {/*            answer:'Sorry, we cannot find the answer',*/}
-                                            {/*            tag:1*/}
-                                            {/*        })*/}
-                                            {/*    }}*/}
-                                            {/*>*/}
-                                            {/*    NO*/}
-                                            {/*</MDBBtn>*/}
-
                                         </div>
                                     ):(null)
                                     }
@@ -344,18 +333,19 @@ export class AskQuestion extends React.Component {
                             <div className="ml-3">
                                 <MDBBtn
                                     tag="a" floating color="green lighten-2" style={{margin:'6px'}}
-                                    onClick={this.toggleListen}
-                                >
-                                    <MDBIcon icon="microphone" />
-                                </MDBBtn>
-                            </div>
-                            <div className="ml-2">
-                                <MDBBtn
-                                    tag="a" floating color="purple lighten-2" style={{margin:'6px'}}
                                     onClick={()=>{this.searchAnswer(this.state.wolfQuestion)}}
                                 >
                                     <MDBIcon icon="question" />
                                 </MDBBtn>
+                            </div>
+                            <div className="ml-1">
+                                <MDBBtn
+                                    tag="a" floating color="purple lighten-2" style={{margin:'6px'}}
+                                    onClick={this.toggleListen}
+                                >
+                                    <MDBIcon icon="microphone" />
+                                </MDBBtn>
+
                             </div>
                         </div>
                         <div className={classes.speechBorder} >
@@ -370,8 +360,15 @@ export class AskQuestion extends React.Component {
                                 className="py-3 px-3 w-100 purple lighten-2"
                                 style={{boxShadow:'none', borderRadius:'15px',}}
                             >
-                                <p  style={{borderStyle:'solid',borderColor:'white',borderWidth:'0 0 1px 0'}}>Hints/Answer</p>
-                                <p>{this.state.answer}</p>
+                                <p
+                                    style={{borderStyle:'solid',borderColor:'white',borderWidth:'0 0 1px 0'}}
+                                    className={classes.pb1}
+                                >Hints/Answer</p>
+                                {this.state.tag<1? (
+                                    <p className={classes.pb3}>{this.state.hints}</p>
+                                ):(null)}
+
+                                <p className={classes.pb2}>{this.state.answer}</p>
                             </MDBCard>
                         </div>
                         <div>
