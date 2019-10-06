@@ -135,6 +135,16 @@ export class AskQuestion extends React.Component {
                 if (event.results[i].isFinal) finalTranscript += transcript + ' ';
                 else interimTranscript += transcript;
             }
+            if (this.state.modal1){
+                this.setState({
+                    redQuestion:finalTranscript
+                })
+            }
+            else if(this.state.modal2){
+                this.setState({
+                    wolfQuestion:finalTranscript
+                })
+            }
             document.getElementById('interim').innerHTML = interimTranscript;
             document.getElementById('final').value = finalTranscript;
 
@@ -163,6 +173,8 @@ export class AskQuestion extends React.Component {
     }
 
     render() {
+        console.log(this.state.redQuestion)
+        console.log(this.state.wolfQuestion)
         return (
             <div>
                 <div className={classes.fixed}>
