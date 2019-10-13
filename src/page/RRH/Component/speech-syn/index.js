@@ -31,7 +31,7 @@ const populateVoiceList=()=>{
     }
 };
 export const handleListen=(text)=>{
-    populateVoiceList()
+    populateVoiceList();
 
     if (speechSynthesis.onvoiceschanged !== undefined) {
         speechSynthesis.onvoiceschanged =()=>{populateVoiceList();}
@@ -45,8 +45,9 @@ export const handleListen=(text)=>{
         utterThis.voice = voices[i];
 
     }
-    utterThis.pitch = 1;
+    utterThis.pitch = 1.5;
     utterThis.rate = 1;
+    utterThis.lang = 'en-US';
     synth.speak(utterThis);
 
 };

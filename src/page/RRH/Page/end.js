@@ -67,12 +67,12 @@ export class End extends React.Component {
                     this.setState({
 
                         feedback:answer.substring(1,answer.length),
-                        tag:''
+                        tag:'No.'
                     })
                 }
                 else{
                     this.setState({
-                       feedback:answer.substring(1,answer.length),
+                       feedback:'',
                         tag:'Yes! You got it.'
                     })
                 }
